@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "build_items",
+  "info": {
+    "singularName": "build-item",
+    "pluralName": "build-items",
+    "displayName": "Build_item",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "build_id": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::build.build",
+      "inversedBy": "build_items"
+    },
+    "item_id": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::item.item",
+      "inversedBy": "build_items"
+    }
+  }
+}

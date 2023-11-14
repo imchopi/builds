@@ -677,6 +677,268 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiBuildBuild extends Schema.CollectionType {
+  collectionName: 'builds';
+  info: {
+    singularName: 'build';
+    pluralName: 'builds';
+    displayName: 'Build';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    build_name: Attribute.String;
+    build_items: Attribute.Relation<
+      'api::build.build',
+      'oneToMany',
+      'api::build-item.build-item'
+    >;
+    class_id: Attribute.Relation<
+      'api::build.build',
+      'manyToOne',
+      'api::class.class'
+    >;
+    extended_user: Attribute.Relation<
+      'api::build.build',
+      'manyToOne',
+      'api::extender-user.extender-user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::build.build',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::build.build',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBuildItemBuildItem extends Schema.CollectionType {
+  collectionName: 'build_items';
+  info: {
+    singularName: 'build-item';
+    pluralName: 'build-items';
+    displayName: 'Build_item';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    build_id: Attribute.Relation<
+      'api::build-item.build-item',
+      'manyToOne',
+      'api::build.build'
+    >;
+    item_id: Attribute.Relation<
+      'api::build-item.build-item',
+      'manyToOne',
+      'api::item.item'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::build-item.build-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::build-item.build-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiClassClass extends Schema.CollectionType {
+  collectionName: 'classes';
+  info: {
+    singularName: 'class';
+    pluralName: 'classes';
+    displayName: 'Class';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    builds: Attribute.Relation<
+      'api::class.class',
+      'oneToMany',
+      'api::build.build'
+    >;
+    class_img: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::class.class',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::class.class',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiExtenderUserExtenderUser extends Schema.CollectionType {
+  collectionName: 'extender_users';
+  info: {
+    singularName: 'extender-user';
+    pluralName: 'extender-users';
+    displayName: 'ExtendedUser';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    users: Attribute.Relation<
+      'api::extender-user.extender-user',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    builds: Attribute.Relation<
+      'api::extender-user.extender-user',
+      'oneToMany',
+      'api::build.build'
+    >;
+    name: Attribute.String & Attribute.Required;
+    surname: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::extender-user.extender-user',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::extender-user.extender-user',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiItemItem extends Schema.CollectionType {
+  collectionName: 'items';
+  info: {
+    singularName: 'item';
+    pluralName: 'items';
+    displayName: 'Item';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    item_name: Attribute.String;
+    item_detail: Attribute.Text;
+    build_items: Attribute.Relation<
+      'api::item.item',
+      'oneToMany',
+      'api::build-item.build-item'
+    >;
+    quality_id: Attribute.Relation<
+      'api::item.item',
+      'manyToOne',
+      'api::quality.quality'
+    >;
+    type_id: Attribute.Relation<
+      'api::item.item',
+      'manyToOne',
+      'api::type.type'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::item.item', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::item.item', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiQualityQuality extends Schema.CollectionType {
+  collectionName: 'qualities';
+  info: {
+    singularName: 'quality';
+    pluralName: 'qualities';
+    displayName: 'Quality';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    quality_name: Attribute.String;
+    items: Attribute.Relation<
+      'api::quality.quality',
+      'oneToMany',
+      'api::item.item'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::quality.quality',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::quality.quality',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTypeType extends Schema.CollectionType {
+  collectionName: 'types';
+  info: {
+    singularName: 'type';
+    pluralName: 'types';
+    displayName: 'Type';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    type_name: Attribute.String;
+    items: Attribute.Relation<'api::type.type', 'oneToMany', 'api::item.item'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::type.type', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::type.type', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -693,6 +955,13 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::build.build': ApiBuildBuild;
+      'api::build-item.build-item': ApiBuildItemBuildItem;
+      'api::class.class': ApiClassClass;
+      'api::extender-user.extender-user': ApiExtenderUserExtenderUser;
+      'api::item.item': ApiItemItem;
+      'api::quality.quality': ApiQualityQuality;
+      'api::type.type': ApiTypeType;
     }
   }
 }
