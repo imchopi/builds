@@ -18,12 +18,6 @@
     "item_detail": {
       "type": "text"
     },
-    "build_items": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::build-item.build-item",
-      "mappedBy": "item_id"
-    },
     "quality_id": {
       "type": "relation",
       "relation": "manyToOne",
@@ -35,6 +29,12 @@
       "relation": "manyToOne",
       "target": "api::type.type",
       "inversedBy": "items"
+    },
+    "builds_id": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::build.build",
+      "mappedBy": "items_id"
     }
   }
 }

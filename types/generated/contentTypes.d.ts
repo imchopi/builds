@@ -690,11 +690,6 @@ export interface ApiBuildBuild extends Schema.CollectionType {
   };
   attributes: {
     build_name: Attribute.String;
-    build_items: Attribute.Relation<
-      'api::build.build',
-      'oneToMany',
-      'api::build-item.build-item'
-    >;
     class_id: Attribute.Relation<
       'api::build.build',
       'manyToOne',
@@ -705,57 +700,22 @@ export interface ApiBuildBuild extends Schema.CollectionType {
       'manyToOne',
       'api::extender-user.extender-user'
     >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
+    items_id: Attribute.Relation<
       'api::build.build',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::build.build',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiBuildItemBuildItem extends Schema.CollectionType {
-  collectionName: 'build_items';
-  info: {
-    singularName: 'build-item';
-    pluralName: 'build-items';
-    displayName: 'Build_item';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    build_id: Attribute.Relation<
-      'api::build-item.build-item',
-      'manyToOne',
-      'api::build.build'
-    >;
-    item_id: Attribute.Relation<
-      'api::build-item.build-item',
-      'manyToOne',
+      'manyToMany',
       'api::item.item'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::build-item.build-item',
+      'api::build.build',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::build-item.build-item',
+      'api::build.build',
       'oneToOne',
       'admin::user'
     > &
@@ -856,11 +816,6 @@ export interface ApiItemItem extends Schema.CollectionType {
   attributes: {
     item_name: Attribute.String;
     item_detail: Attribute.Text;
-    build_items: Attribute.Relation<
-      'api::item.item',
-      'oneToMany',
-      'api::build-item.build-item'
-    >;
     quality_id: Attribute.Relation<
       'api::item.item',
       'manyToOne',
@@ -870,6 +825,11 @@ export interface ApiItemItem extends Schema.CollectionType {
       'api::item.item',
       'manyToOne',
       'api::type.type'
+    >;
+    builds_id: Attribute.Relation<
+      'api::item.item',
+      'manyToMany',
+      'api::build.build'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -956,7 +916,6 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::build.build': ApiBuildBuild;
-      'api::build-item.build-item': ApiBuildItemBuildItem;
       'api::class.class': ApiClassClass;
       'api::extender-user.extender-user': ApiExtenderUserExtenderUser;
       'api::item.item': ApiItemItem;
