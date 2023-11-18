@@ -15,12 +15,6 @@
     "name": {
       "type": "string"
     },
-    "builds": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::build.build",
-      "mappedBy": "class_id"
-    },
     "class_img": {
       "allowedTypes": [
         "images",
@@ -30,6 +24,12 @@
       ],
       "type": "media",
       "multiple": false
+    },
+    "build_infos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::build-info.build-info",
+      "mappedBy": "class"
     }
   }
 }

@@ -17,12 +17,6 @@
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
     },
-    "builds": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::build.build",
-      "mappedBy": "extended_user"
-    },
     "name": {
       "type": "string",
       "required": true
@@ -30,6 +24,12 @@
     "surname": {
       "type": "string",
       "required": true
+    },
+    "build_infos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::build-info.build-info",
+      "mappedBy": "extended_user"
     }
   }
 }

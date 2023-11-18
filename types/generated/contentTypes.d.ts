@@ -677,12 +677,12 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiBuildBuild extends Schema.CollectionType {
-  collectionName: 'builds';
+export interface ApiBuildInfoBuildInfo extends Schema.CollectionType {
+  collectionName: 'build_infos';
   info: {
-    singularName: 'build';
-    pluralName: 'builds';
-    displayName: 'Build';
+    singularName: 'build-info';
+    pluralName: 'build-infos';
+    displayName: 'BuildInfo';
     description: '';
   };
   options: {
@@ -690,32 +690,32 @@ export interface ApiBuildBuild extends Schema.CollectionType {
   };
   attributes: {
     build_name: Attribute.String;
-    class_id: Attribute.Relation<
-      'api::build.build',
+    class: Attribute.Relation<
+      'api::build-info.build-info',
       'manyToOne',
       'api::class.class'
     >;
-    extended_user: Attribute.Relation<
-      'api::build.build',
-      'manyToOne',
-      'api::extender-user.extender-user'
-    >;
-    items_id: Attribute.Relation<
-      'api::build.build',
+    items: Attribute.Relation<
+      'api::build-info.build-info',
       'manyToMany',
       'api::item.item'
+    >;
+    extended_user: Attribute.Relation<
+      'api::build-info.build-info',
+      'manyToOne',
+      'api::extender-user.extender-user'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::build.build',
+      'api::build-info.build-info',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::build.build',
+      'api::build-info.build-info',
       'oneToOne',
       'admin::user'
     > &
@@ -736,12 +736,12 @@ export interface ApiClassClass extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String;
-    builds: Attribute.Relation<
+    class_img: Attribute.Media;
+    build_infos: Attribute.Relation<
       'api::class.class',
       'oneToMany',
-      'api::build.build'
+      'api::build-info.build-info'
     >;
-    class_img: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -777,13 +777,13 @@ export interface ApiExtenderUserExtenderUser extends Schema.CollectionType {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
-    builds: Attribute.Relation<
-      'api::extender-user.extender-user',
-      'oneToMany',
-      'api::build.build'
-    >;
     name: Attribute.String & Attribute.Required;
     surname: Attribute.String & Attribute.Required;
+    build_infos: Attribute.Relation<
+      'api::extender-user.extender-user',
+      'oneToMany',
+      'api::build-info.build-info'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -826,10 +826,10 @@ export interface ApiItemItem extends Schema.CollectionType {
       'manyToOne',
       'api::type.type'
     >;
-    builds_id: Attribute.Relation<
+    build_infos: Attribute.Relation<
       'api::item.item',
       'manyToMany',
-      'api::build.build'
+      'api::build-info.build-info'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -915,7 +915,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::build.build': ApiBuildBuild;
+      'api::build-info.build-info': ApiBuildInfoBuildInfo;
       'api::class.class': ApiClassClass;
       'api::extender-user.extender-user': ApiExtenderUserExtenderUser;
       'api::item.item': ApiItemItem;

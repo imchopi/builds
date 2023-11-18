@@ -30,11 +30,11 @@
       "target": "api::type.type",
       "inversedBy": "items"
     },
-    "builds_id": {
+    "build_infos": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::build.build",
-      "mappedBy": "items_id"
+      "target": "api::build-info.build-info",
+      "mappedBy": "items"
     }
   }
 }
