@@ -30,6 +30,16 @@
       "relation": "oneToMany",
       "target": "api::build-info.build-info",
       "mappedBy": "extended_user"
+    },
+    "picture": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

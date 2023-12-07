@@ -784,6 +784,7 @@ export interface ApiExtenderUserExtenderUser extends Schema.CollectionType {
       'oneToMany',
       'api::build-info.build-info'
     >;
+    picture: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
