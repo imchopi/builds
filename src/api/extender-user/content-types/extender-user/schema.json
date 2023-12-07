@@ -25,7 +25,7 @@
       "type": "string",
       "required": true
     },
-    "build_infos": {
+    "build_info": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::build-info.build-info",

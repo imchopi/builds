@@ -15,9 +15,6 @@
     "item_name": {
       "type": "string"
     },
-    "item_detail": {
-      "type": "text"
-    },
     "quality_id": {
       "type": "relation",
       "relation": "manyToOne",

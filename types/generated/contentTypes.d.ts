@@ -779,7 +779,7 @@ export interface ApiExtenderUserExtenderUser extends Schema.CollectionType {
     >;
     name: Attribute.String & Attribute.Required;
     surname: Attribute.String & Attribute.Required;
-    build_infos: Attribute.Relation<
+    build_info: Attribute.Relation<
       'api::extender-user.extender-user',
       'oneToMany',
       'api::build-info.build-info'
@@ -815,7 +815,6 @@ export interface ApiItemItem extends Schema.CollectionType {
   };
   attributes: {
     item_name: Attribute.String;
-    item_detail: Attribute.Text;
     quality_id: Attribute.Relation<
       'api::item.item',
       'manyToOne',

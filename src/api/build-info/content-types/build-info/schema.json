@@ -31,7 +31,7 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::extender-user.extender-user",
-      "inversedBy": "build_infos"
+      "inversedBy": "build_info"
     }
   }
 }
