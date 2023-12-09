@@ -13,7 +13,8 @@
   "pluginOptions": {},
   "attributes": {
     "item_name": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 20
     },
     "quality_id": {
       "type": "relation",

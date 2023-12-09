@@ -817,7 +817,10 @@ export interface ApiItemItem extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    item_name: Attribute.String;
+    item_name: Attribute.String &
+      Attribute.SetMinMaxLength<{
+        maxLength: 20;
+      }>;
     quality_id: Attribute.Relation<
       'api::item.item',
       'manyToOne',
