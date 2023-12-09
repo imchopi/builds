@@ -689,7 +689,10 @@ export interface ApiBuildInfoBuildInfo extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    build_name: Attribute.String;
+    build_name: Attribute.String &
+      Attribute.SetMinMaxLength<{
+        maxLength: 20;
+      }>;
     class: Attribute.Relation<
       'api::build-info.build-info',
       'manyToOne',

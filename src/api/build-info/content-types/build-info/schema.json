@@ -13,7 +13,8 @@
   "pluginOptions": {},
   "attributes": {
     "build_name": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 20
     },
     "class": {
       "type": "relation",
